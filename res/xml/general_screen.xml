@@ -18,7 +18,7 @@
     <CheckBoxPreference 
         android:defaultValue="false"
         android:key="prefdischarge"
-        android:summary="@string/low_summary"
-        android:title="@string/low_title"/>
+        android:summary="@string/discharge_summary"
+        android:title="@string/discharge_title"/>
 
 </PreferenceScreen>
