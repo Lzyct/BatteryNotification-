@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Battery Notification+</string>
+    <string name="action_settings">Settings</string>
+    <string name="general_title">General</string>
+    <string name="advance_title">Advance</string>
+    
+    <!-- Advance Settings -->
+	<string name="fast_title">Fast Charge</string>
+	<string name="fast_summary">Enable/Disable Fast Charge</string>
+	
+	<!-- General Settings -->
+	<string name="low_title">Battery Low Notification</string>
+	<string name="low_summary">Enable/Disable Battery Low Notification</string>
+	<string name="full_title">Battery Full Notification</string>
+	<string name="full_summary">Enable/Disable Battery Full Notification</string>
+	<string name="charge_title">Charging Notification</string>
+	<string name="charge_summary">Enable/Disable Charging Notification</string>
+	<string name="discharge_title">Discharge Notification</string>
+	<string name="discharge_summary">Enable/Disable Discharging Notification</string>
+</resources>
