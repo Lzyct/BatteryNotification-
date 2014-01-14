@@ -12,6 +12,8 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 
@@ -26,9 +28,42 @@ public class Advance extends PreferenceActivity {
         super.onCreate(savedInstanceState);
  
         addPreferencesFromResource(R.xml.advance_screen);
+        //set checked state
         setChecked();
-        	
+        
+        //set value fast charge
+        setValue();
+        
+        
     }
+	
+	public void setValue(){
+		//exec command
+		final String enable  = "echo 1 > "+fastcharge;
+		final String disable = "echo 0 > "+fastcharge;
+		final String close = "exit";	
+        
+		//get on change checkbox preference
+        super.findPreference("preffast").
+        setOnPreferenceChangeListener( new OnPreferenceChangeListener(){
+			@Override
+			public boolean onPreferenceChange(Preference preference,
+					Object val) {
+				Boolean checkBoxVal = (Boolean) val;
+				if(checkBoxVal.booleanValue()==true) {
+                    cmd.execCommand(enable);
+                    cmd.execCommand(close);
+                }
+				else {
+					cmd.execCommand(disable);
+                    cmd.execCommand(close);
+				}
+				// TODO Auto-generated method stub
+				return true;
+			}
+        });
+        	
+	}
 	
 	public void getChecked (){
 		SharedPreferences sharedPrefs = PreferenceManager
@@ -39,26 +74,27 @@ public class Advance extends PreferenceActivity {
 	public void setChecked(){
 		getChecked();
 		cb1 = (CheckBoxPreference)findPreference("preffast");
-		String enable  = "echo 1 > "+fastcharge;
-		String disable = "echo 0 > "+fastcharge;
-		String close = "exit";	
 		String status = getCurrentStatus();
-		if ((status.equals("1")) ){
-			cb1.setChecked(true);
+		String aktif = "1";
+		String tdk="0";
+		
+		//check status by value on status
+		if ((status.equals(aktif)) ){
 			fast=true;
 		}
-		else if ((status.equals("0")) ){
-			cb1.setChecked(true);
+		else if ((status.equals(tdk)) ){
 			fast=false;
 		}
-		else if (fast==true){
+		
+		//after get status then execute by fast value
+		if (fast==true){
 			cb1.setChecked(true);
 		}
 		else if (fast==false) {
 			cb1.setChecked(false);
 		}
-		
 	}
+
 	
 	public void checkFastSupport(){
 		File myFile = new File(fastcharge);
