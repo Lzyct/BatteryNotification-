@@ -1,14 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-    <PreferenceScreen
-        android:key="kalibrasi"
-        android:summary="@string/kalibarasi_summary"
-        android:title="@string/kalibarasi_title"/>
-    
-    <CheckBoxPreference 
-        android:defaultValue="false"
-        android:key="preffast"
-        android:summary="@string/fast_summary"
-        android:title="@string/fast_title"/>
-
+       <PreferenceCategory android:title="@string/battery_info">
+	       <PreferenceScreen
+	            android:key="status"
+	            android:title="@string/status_title"
+	            android:summary="@string/kosong"/>
+	       
+	       <PreferenceScreen
+	            android:key="plug"
+	            android:title="@string/plug_title"
+	            android:summary="@string/kosong"/>
+	       
+	       <PreferenceScreen
+	            android:key="level"
+	            android:title="@string/level_title"
+	            android:summary="@string/kosong"/>
+	       
+	       <PreferenceScreen
+	            android:key="health"
+	            android:title="@string/health_title"
+	            android:summary="@string/kosong"/>
+	       
+	       <PreferenceScreen
+	            android:key="voltage"
+	            android:title="@string/voltage_title"
+	            android:summary="@string/kosong"/>
+	       
+	       <PreferenceScreen
+	            android:key="temp"
+	            android:title="@string/temp_title"
+	            android:summary="@string/kosong"/>
+	       
+	       <PreferenceScreen 
+	            android:key="tekno"
+	            android:title="@string/tekno_title"
+	            android:summary="@string/kosong"/>
+	       
+	       <PreferenceScreen
+	            android:key="time"
+	            android:title="@string/time_title"
+	            android:summary="@string/kosong"/>
+       
+       </PreferenceCategory>
+       
+       <PreferenceCategory android:title="@string/advance_option">
+		    <PreferenceScreen
+		        android:key="kalibrasi"
+		        android:summary="@string/kalibarasi_summary"
+		        android:title="@string/kalibarasi_title"/>
+		    
+		    <CheckBoxPreference 
+		        android:defaultValue="false"
+		        android:key="preffast"
+		        android:summary="@string/fast_summary"
+		        android:title="@string/fast_title"/>
+	    </PreferenceCategory>
 </PreferenceScreen>
