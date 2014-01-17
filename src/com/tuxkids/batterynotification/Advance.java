@@ -3,7 +3,6 @@ package com.tuxkids.batterynotification;
 
 import java.io.File;
 
-import android.R.string;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,6 +11,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.SystemClock;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
@@ -19,30 +20,34 @@ import android.preference.PreferenceActivity;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.widget.Toast;
 
 public class Advance extends PreferenceActivity  {
-	
-	
 	static CMDProcessor cmd = new CMDProcessor();
 	private final static String fastcharge = "/sys/kernel/fast_charge/force_fast_charge";
 	final String close = "exit";
-	
-	
+	private static final int EVENT_TICK = 1;
 
-	public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+	@Override
+    public void onResume() {
+        super.onResume();
+        BatteryInformation();
+        mHandler.sendEmptyMessageDelayed(EVENT_TICK, 1000);
+	}  
+    
+	public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
         addPreferencesFromResource(R.xml.advance_screen);
     	
-        
-        BatteryInformation();
-        //set checked state #fastcharge
-        setChecked();
-        checkFastSupport();    
+        //Battery Information
+        //BatteryInformation();
         
         //battery calibration
         calibration();
+        
+        //fast charge
+        checkFastSupport();    
+        
     }
 
 	
@@ -55,11 +60,10 @@ public class Advance extends PreferenceActivity  {
         int tens = x / 10;
         return Integer.toString(tens) + "." + (x - 10 * tens);
     }
-
    
   private void BatteryInformation (){
-	 
-	  BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {
+
+	BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {
 		//deklarasi preference
 	    	Preference mBatteryStatus = (Preference)findPreference("status");
 	    	Preference mBatteryPlug = (Preference)findPreference("plug");
@@ -67,14 +71,10 @@ public class Advance extends PreferenceActivity  {
 	    	Preference mBatteryHealth = (Preference)findPreference("health");
 	    	Preference mBatteryVoltage = (Preference)findPreference("voltage");
 	    	Preference mBatteryTemp = (Preference)findPreference("temp");
-	    	Preference mBatteryTechnology = (Preference)findPreference("tekno");
-	    	Preference mBatteryTime = (Preference)findPreference("time");
-	    	
-	    	
-	    	
-	            public void onReceive(Context context, Intent intent) {
-	                context.unregisterReceiver(this);
-		        	String action = intent.getAction();
+	    	Preference mBatteryTechnology = (Preference)findPreference("tekno");	    
+
+	    	public void onReceive(Context context, Intent intent) {
+	                String action = intent.getAction();
 		        	if (intent.ACTION_BATTERY_CHANGED.equals(action)) {
 		            	
 	            	//get battery level
@@ -84,7 +84,7 @@ public class Advance extends PreferenceActivity  {
 	                 
 	                //get voltage
 	                int voltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE,0);
-	                mBatteryVoltage.setSummary(String.valueOf(voltage));
+	                mBatteryVoltage.setSummary(String.valueOf(voltage+"mV"));
 	         
 	                //get temperature
 	                int temp = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE,0);
@@ -94,10 +94,6 @@ public class Advance extends PreferenceActivity  {
 	                //get technology
 	                String tekno = intent.getStringExtra(BatteryManager.EXTRA_TECHNOLOGY);
 	                mBatteryTechnology.setSummary(String.valueOf(tekno));
-	                
-	                //get time boot
-	                long uptime = SystemClock.elapsedRealtime();
-	                mBatteryTime.setSummary(String.valueOf(DateUtils.formatElapsedTime(uptime / 1000)));
 	                
 	                //get plugType
 	             
@@ -161,7 +157,31 @@ public class Advance extends PreferenceActivity  {
 	    };
 	    IntentFilter batteryLevelFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 	    registerReceiver(mBatteryInfoReceiver, batteryLevelFilter);
+ }
+  
+  
+  private Handler mHandler = new Handler() {
+      @Override
+      public void handleMessage(Message msg) {
+          switch (msg.what) {
+              case EVENT_TICK:
+            	  updateTime();
+                  sendEmptyMessageDelayed(EVENT_TICK, 1000);
+                  
+                  break;
+          }
+      }
+  };
+  public void updateTime(){
+	//get time boot
+	  Preference mBatteryTime = (Preference)findPreference("time");
+      long uptime = SystemClock.elapsedRealtime();
+      mBatteryTime.setSummary(String.valueOf(DateUtils.formatElapsedTime(uptime / 1000)));
+      
+      
   }
+	    	    
+	
 	//FastCharge
 	public void setValue(){
 		//exec command
@@ -190,29 +210,22 @@ public class Advance extends PreferenceActivity  {
         });
         	
 	}
-	
-	
 
-	public void setChecked(){
-		String status = getCurrentStatus();
-		String aktif = "1";
-		String tdk="0";
-		CheckBoxPreference cb1 = (CheckBoxPreference) findPreference("preffast");
-		//set checked by value fast charge
-		if ((status.equals(aktif)) ){
-			cb1.setChecked(true);
-		}
-		else if ((status.equals(tdk)) ){
-			cb1.setChecked(false);
-		}
-	}
-
-	
-	public void checkFastSupport(){
+	public void checkFastSupport() {
 		CheckBoxPreference cb1 = (CheckBoxPreference) findPreference("preffast");
 		File myFile = new File(fastcharge);
 		if (myFile.exists()) {
 			//set value fast charge
+			String status = getCurrentStatus();
+			String aktif = "1";
+			String tdk="0";
+			//set checked by value fast charge
+				if ((status.equals(aktif)) ){
+					cb1.setChecked(true);
+				}
+				else if ((status.equals(tdk)) ){
+					cb1.setChecked(false);
+				}
 	        setValue();
 			}
 		else {
