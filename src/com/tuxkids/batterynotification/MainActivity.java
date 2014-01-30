@@ -33,6 +33,9 @@ public class MainActivity extends TabActivity {
 
 		intent = new Intent().setClass(MainActivity.this, Advance.class);
 		setupTab(new TextView(this), getString(R.string.advance_title), intent);
+		
+		intent = new Intent().setClass(MainActivity.this, Settings.class);
+		setupTab(new TextView(this), getString(R.string.action_settings), intent);
 
     }
 
