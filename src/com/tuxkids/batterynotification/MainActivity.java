@@ -36,8 +36,10 @@ public class MainActivity extends TabActivity {
 		
 		intent = new Intent().setClass(MainActivity.this, Settings.class);
 		setupTab(new TextView(this), getString(R.string.action_settings), intent);
+		
 
     }
+
 
     public static class FlingableTabHost extends TabHost implements TabHost.OnTabChangeListener {
         private GestureDetector mGestureDetector;

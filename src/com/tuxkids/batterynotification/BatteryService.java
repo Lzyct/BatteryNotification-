@@ -7,21 +7,24 @@ import android.util.Log;
 
 public class BatteryService extends Service{
     private static String TAG = "Battery Tools";
+    
+    General Gl = new General();
     @Override
     public IBinder onBind(Intent arg0) {
         // TODO Auto-generated method stub
         return null;
     }
     @SuppressWarnings("deprecation")
-	@Override
-    public void onStart(Intent intent, int startId) {
-        // TODO Auto-generated method stub
-        super.onStart(intent, startId);
-        Log.d(TAG, "BatteryService started");
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
         Intent dialogIntent = new Intent(getBaseContext(), MainActivity.class);
         dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         dialogIntent.setAction(Intent.ACTION_BATTERY_CHANGED);
         getApplication().startActivity(dialogIntent);
+        // We want this service to continue running until it is explicitly
+        // stopped, so return sticky
+        return START_STICKY;
     }
     @Override
     public void onDestroy() {

@@ -1,23 +1,19 @@
 package com.tuxkids.batterynotification;
 
-
-import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.preference.CheckBoxPreference;
-import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
@@ -25,17 +21,20 @@ import android.widget.Toast;
 public class General extends PreferenceActivity {
 	boolean low, full, charge, discharge;
 	CheckBoxPreference cb1, cb2, cb3, cb4;
-	
-	
-	//boolean to fix always playing tone
+
+	// boolean to fix always playing tone
 	boolean a, b, c, d;
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		BatteryInformation();
+		getBatteryInformation();
 	}
 
+	@Override
+	public void onBackPressed() {
+		moveTaskToBack(true);
+	}
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,7 +42,7 @@ public class General extends PreferenceActivity {
 		addPreferencesFromResource(R.xml.general_screen);
 	}
 
-	//mendapatkan status checkbox
+	// mendapatkan status checkbox
 	public void getChecked() {
 		SharedPreferences sharedPrefs = PreferenceManager
 				.getDefaultSharedPreferences(this);
@@ -61,7 +60,7 @@ public class General extends PreferenceActivity {
 
 	// Set ringtone berdasarkan statusnya
 
-	private void BatteryInformation() {
+	private void getBatteryInformation() {
 
 		BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {
 
@@ -75,17 +74,6 @@ public class General extends PreferenceActivity {
 					int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE,
 							100);
 					int battery_level = level * 100 / scale;
-					
-					if (low==true && battery_level <= 12){
-							if (d==false){
-								setRingtoneLow();
-								CharSequence text4 = "Battery is Low\n"+
-								 "Please charge your phone";
-								int duration = Toast.LENGTH_LONG;
-								Toast toast = Toast.makeText(context, text4, duration);
-								toast.show();
-							}
-					}
 
 					// get status
 					int status = intent.getIntExtra(
@@ -103,7 +91,6 @@ public class General extends PreferenceActivity {
 					} else {
 						statusString = 5;
 					}
-					// mBatteryStatus.setSummary(String.valueOf(statusString));
 					getChecked();
 
 					if (charge == true && statusString == 1) {
@@ -118,95 +105,135 @@ public class General extends PreferenceActivity {
 							b = false;
 							d = false;
 						}
-					} else if (discharge == true && statusString == 2) {
-						if (b == false){
+					}
+					if (discharge == true && statusString == 2) {
+						if (b == false) {
 							setRingtoneDischarge();
 							CharSequence text2 = "Battery is Discharge";
 							int duration = Toast.LENGTH_SHORT;
-							Toast toast = Toast.makeText(context, text2, duration);
+							Toast toast = Toast.makeText(context, text2,
+									duration);
 							toast.show();
-							a = false;
 							b = true;
-//							c = false;
+							a = false;
+							c = false;
 						}
 					}
-					   if (full==true && statusString == 4){
-						   if (c==false){
-							setRingtoneFull();
-							CharSequence text3 = "Battery is Full\n"+
-												 "Please unplug your charger";
+					if (low == true && battery_level <= 12 && statusString == 2) {
+						if (d == false) {
+							setRingtoneLow();
+							CharSequence text4 = "Battery is Low\n"
+									+ "Please charge your phone";
 							int duration = Toast.LENGTH_LONG;
-							Toast toast = Toast.makeText(context, text3, duration);
+							Toast toast = Toast.makeText(context, text4,
+									duration);
 							toast.show();
-							c=true;
-						   }
+							d = true;
 						}
+					}
+					if (full == true && statusString == 4) {
+						if (c == false) {
+							setRingtoneFull();
+							tampilNotifikasi();
+							c = true;
+						}
+					}
 				}
 			}
 		};
 		IntentFilter batteryLevelFilter = new IntentFilter(
 				Intent.ACTION_BATTERY_CHANGED);
 		registerReceiver(mBatteryInfoReceiver, batteryLevelFilter);
-		
+
 	}
 
-	//ringtone low
+	// ringtone low
 	public void setRingtoneLow() {
 		String ringtonePreference;
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(getBaseContext());
 		ringtonePreference = prefs.getString("low_sound",
 				"DEFAULT_RINGTONE_URI");
-		if (ringtonePreference !=null){
-			Uri charge = Uri.parse(ringtonePreference);
-			Ringtone r = RingtoneManager.getRingtone(getApplicationContext(),
-					charge);
-			r.play();
+		String dR = "DEFAULT_RINGTONE_URI";
+		if (!(ringtonePreference.equals(dR))) {
+			if (ringtonePreference != null) {
+				Uri charge = Uri.parse(ringtonePreference);
+				Ringtone r = RingtoneManager.getRingtone(
+						getApplicationContext(), charge);
+				r.play();
 			}
+		}
+
 	}
-	
-	//ringtone full
+
+	// ringtone full
 	public void setRingtoneFull() {
 		String ringtonePreference;
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(getBaseContext());
 		ringtonePreference = prefs.getString("full_sound",
 				"DEFAULT_RINGTONE_URI");
-		if (ringtonePreference !=null){
-			Uri charge = Uri.parse(ringtonePreference);
-			Ringtone r = RingtoneManager.getRingtone(getApplicationContext(),
-					charge);
-			r.play();
+		String dR = "DEFAULT_RINGTONE_URI";
+		if (!(ringtonePreference.equals(dR))) {
+			if (ringtonePreference != null) {
+				Uri charge = Uri.parse(ringtonePreference);
+				Ringtone r = RingtoneManager.getRingtone(
+						getApplicationContext(), charge);
+				r.play();
 			}
+		}
+
 	}
-	
-	//ringtone charge
+
+	// ringtone charge
 	public void setRingtoneCharge() {
 		String ringtonePreference;
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(getBaseContext());
 		ringtonePreference = prefs.getString("charge_sound",
 				"DEFAULT_RINGTONE_URI");
-		if (ringtonePreference !=null){
-			Uri charge = Uri.parse(ringtonePreference);
-			Ringtone r = RingtoneManager.getRingtone(getApplicationContext(),
-					charge);
-			r.play();
+		String dR = "DEFAULT_RINGTONE_URI";
+		if (!(ringtonePreference.equals(dR))) {
+			if (ringtonePreference != null) {
+				Uri charge = Uri.parse(ringtonePreference);
+				Ringtone r = RingtoneManager.getRingtone(
+						getApplicationContext(), charge);
+				r.play();
 			}
+		}
+
 	}
-	
-	//ringtone discharge
+
+	// ringtone discharge
 	public void setRingtoneDischarge() {
 		String ringtonePreference;
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(getBaseContext());
 		ringtonePreference = prefs.getString("discharge_sound",
 				"DEFAULT_RINGTONE_URI");
-		if (ringtonePreference !=null){
-		Uri charge = Uri.parse(ringtonePreference);
-		Ringtone r = RingtoneManager.getRingtone(getApplicationContext(),
-				charge);
-		r.play();
+		String dR = "DEFAULT_RINGTONE_URI";
+		if (!(ringtonePreference.equals(dR))) {
+			if (ringtonePreference != null) {
+				Uri charge = Uri.parse(ringtonePreference);
+				Ringtone r = RingtoneManager.getRingtone(
+						getApplicationContext(), charge);
+				r.play();
+			}
 		}
-	}	
+	}
+
+	public void tampilNotifikasi() {
+
+		NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		Notification notification = new Notification(R.drawable.ic_launcher,
+				"Battery Full", System.currentTimeMillis());
+		notification.flags |= Notification.FLAG_AUTO_CANCEL;
+		Intent intent = new Intent(this, Advance.class);
+		PendingIntent activity = PendingIntent.getActivity(this, 0, intent, 0);
+		notification.setLatestEventInfo(this, "Battery Notification+",
+				"Touch to see battery status", activity);
+		notification.number += 1;
+		notificationManager.notify(0, notification);
+	}
+
 }
