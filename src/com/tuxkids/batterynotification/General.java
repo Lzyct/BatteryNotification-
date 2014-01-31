@@ -228,11 +228,10 @@ public class General extends PreferenceActivity {
 		Notification notification = new Notification(R.drawable.ic_launcher,
 				"Battery Full", System.currentTimeMillis());
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
-		Intent intent = new Intent(this, Advance.class);
+		Intent intent = new Intent(this, MainActivity.class);
 		PendingIntent activity = PendingIntent.getActivity(this, 0, intent, 0);
-		notification.setLatestEventInfo(this, "Battery Notification+",
-				"Touch to see battery status", activity);
-		notification.number += 1;
+		notification.setLatestEventInfo(this, "Battery Full",
+				"Swipe to remove notification", activity);
 		notificationManager.notify(0, notification);
 	}
 
