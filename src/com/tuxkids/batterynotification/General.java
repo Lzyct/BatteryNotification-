@@ -130,19 +130,14 @@ public class General extends PreferenceActivity {
 					if (low == true && battery_level <= 12 && statusString == 2) {
 						if (d == false) {
 							setRingtoneLow();
-							CharSequence text4 = "Battery is Low\n"
-									+ "Please charge your phone";
-							int duration = Toast.LENGTH_LONG;
-							Toast toast = Toast.makeText(context, text4,
-									duration);
-							toast.show();
+							tampilNotifikasiLow();
 							d = true;
 						}
 					}
 					if (full == true && statusString == 4) {
 						if (c == false) {
 							setRingtoneFull();
-							tampilNotifikasi();
+							tampilNotifikasiFull();
 							c = true;
 						}
 					}
@@ -238,11 +233,24 @@ public class General extends PreferenceActivity {
 		}
 	}
 
-	public void tampilNotifikasi() {
+	public void tampilNotifikasiFull() {
 
 		NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		Notification notification = new Notification(R.drawable.ic_launcher,
 				"Battery Full", System.currentTimeMillis());
+		notification.flags |= Notification.FLAG_AUTO_CANCEL;
+		Intent intent = new Intent(this, MainActivity.class);
+		PendingIntent activity = PendingIntent.getActivity(this, 0, intent, 0);
+		notification.setLatestEventInfo(this, "Battery Full",
+				"Swipe to remove notification", activity);
+		notificationManager.notify(0, notification);
+	}
+	
+	public void tampilNotifikasiLow() {
+
+		NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		Notification notification = new Notification(R.drawable.ic_launcher,
+				"Battery Low", System.currentTimeMillis());
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 		Intent intent = new Intent(this, MainActivity.class);
 		PendingIntent activity = PendingIntent.getActivity(this, 0, intent, 0);

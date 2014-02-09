@@ -64,7 +64,7 @@
     <string name="setboot_title">Set on boot</string>
     <string name="setboot_summary">Run app when boot</string>
     <string name="app_info_title">Battery Notification+</string>
-    <string name="app_info_summary">Version 1.0</string>
+    <string name="app_info_summary">Version 1.1</string>
     <string name="devid_title">Developer ID</string>
     <string name="devid_summary">Tuxkids</string>
     <string name="contact_title">Contact Developer</string>
