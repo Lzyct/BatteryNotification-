@@ -55,6 +55,8 @@ public final class R {
         public static final int main=0x7f0b0000;
     }
     public static final class string {
+        /**  Tab Name 
+         */
         public static final int action_settings=0x7f060003;
         public static final int additional_system_update=0x7f060000;
         public static final int additional_system_update_menu=0x7f060001;
@@ -63,64 +65,70 @@ public final class R {
         public static final int app_info_summary=0x7f06003b;
         public static final int app_info_title=0x7f06003a;
         public static final int app_name=0x7f060002;
+        /**  Tab Advance 
+         */
         public static final int battery_info=0x7f060006;
-        public static final int battery_info_health_dead=0x7f060020;
-        public static final int battery_info_health_good=0x7f06001e;
-        public static final int battery_info_health_over_voltage=0x7f060021;
-        public static final int battery_info_health_overheat=0x7f06001f;
-        public static final int battery_info_health_unknown=0x7f06001d;
-        public static final int battery_info_health_unspecified_failure=0x7f060022;
-        public static final int battery_info_power_ac=0x7f060019;
-        public static final int battery_info_power_ac_usb=0x7f06001b;
-        public static final int battery_info_power_unknown=0x7f06001c;
-        public static final int battery_info_power_unplugged=0x7f060018;
-        public static final int battery_info_power_usb=0x7f06001a;
-        public static final int battery_info_status_charging=0x7f060014;
-        public static final int battery_info_status_discharging=0x7f060015;
-        public static final int battery_info_status_full=0x7f060017;
-        public static final int battery_info_status_not_charging=0x7f060016;
-        public static final int battery_info_status_unknown=0x7f060013;
-        public static final int battery_info_temperature_units=0x7f060023;
-        public static final int charge_summary=0x7f06002d;
-        public static final int charge_title=0x7f06002c;
+        public static final int battery_info_health_dead=0x7f06001e;
+        public static final int battery_info_health_good=0x7f06001c;
+        public static final int battery_info_health_over_voltage=0x7f06001f;
+        public static final int battery_info_health_overheat=0x7f06001d;
+        public static final int battery_info_health_unknown=0x7f06001b;
+        public static final int battery_info_health_unspecified_failure=0x7f060020;
+        public static final int battery_info_power_ac=0x7f060017;
+        public static final int battery_info_power_ac_usb=0x7f060019;
+        public static final int battery_info_power_unknown=0x7f06001a;
+        public static final int battery_info_power_unplugged=0x7f060016;
+        public static final int battery_info_power_usb=0x7f060018;
+        public static final int battery_info_status_charging=0x7f060012;
+        public static final int battery_info_status_discharging=0x7f060013;
+        public static final int battery_info_status_full=0x7f060015;
+        public static final int battery_info_status_not_charging=0x7f060014;
+        public static final int battery_info_status_unknown=0x7f060011;
+        public static final int battery_info_temperature_units=0x7f060021;
+        public static final int charge_summary=0x7f06002b;
+        public static final int charge_title=0x7f06002a;
         public static final int contact_summary=0x7f06003f;
         public static final int contact_title=0x7f06003e;
         public static final int devid_summary=0x7f06003d;
         public static final int devid_title=0x7f06003c;
-        public static final int devinfo=0x7f060009;
-        public static final int discharge_summary=0x7f06002f;
-        public static final int discharge_title=0x7f06002e;
-        public static final int fast_summary=0x7f060025;
-        public static final int fast_title=0x7f060024;
-        public static final int full_summary=0x7f06002b;
-        public static final int full_title=0x7f06002a;
+        /**  Tab Settings 
+         */
+        public static final int devinfo=0x7f060037;
+        public static final int discharge_summary=0x7f06002d;
+        public static final int discharge_title=0x7f06002c;
+        public static final int fast_summary=0x7f060023;
+        public static final int fast_title=0x7f060022;
+        public static final int full_summary=0x7f060029;
+        public static final int full_title=0x7f060028;
         public static final int general_title=0x7f060004;
-        public static final int health_title=0x7f06000e;
-        public static final int kalibarasi_summary=0x7f060027;
-        public static final int kalibarasi_title=0x7f060026;
-        public static final int kosong=0x7f06000a;
-        public static final int level_title=0x7f06000d;
-        public static final int low_summary=0x7f060029;
-        public static final int low_title=0x7f060028;
-        public static final int notification_title=0x7f060008;
-        public static final int plug_title=0x7f06000c;
+        public static final int health_title=0x7f06000c;
+        public static final int kalibarasi_summary=0x7f060025;
+        public static final int kalibarasi_title=0x7f060024;
+        public static final int kosong=0x7f060008;
+        public static final int level_title=0x7f06000b;
+        public static final int low_summary=0x7f060027;
+        /**  Tab General 
+         */
+        public static final int low_title=0x7f060026;
+        public static final int notification_title=0x7f060036;
+        public static final int plug_title=0x7f06000a;
         public static final int setboot_summary=0x7f060039;
         public static final int setboot_title=0x7f060038;
-        public static final int sound_charge_summary=0x7f060035;
-        public static final int sound_charge_title=0x7f060034;
-        public static final int sound_discharge_summary=0x7f060037;
-        public static final int sound_discharge_title=0x7f060036;
-        public static final int sound_full_summary=0x7f060033;
-        public static final int sound_full_title=0x7f060032;
-        public static final int sound_low_summary=0x7f060031;
-        public static final int sound_low_title=0x7f060030;
-        public static final int status_title=0x7f06000b;
-        public static final int tekno_title=0x7f060011;
-        public static final int temp_title=0x7f060010;
+        public static final int sound_charge_summary=0x7f060033;
+        public static final int sound_charge_title=0x7f060032;
+        public static final int sound_discharge_summary=0x7f060035;
+        public static final int sound_discharge_title=0x7f060034;
+        public static final int sound_full_summary=0x7f060031;
+        public static final int sound_full_title=0x7f060030;
+        public static final int sound_low_summary=0x7f06002f;
+        public static final int sound_low_title=0x7f06002e;
+        public static final int status_title=0x7f060009;
+        public static final int tekno_title=0x7f06000f;
+        public static final int temp_title=0x7f06000e;
         public static final int thanks_summary=0x7f060041;
         public static final int thanks_title=0x7f060040;
-        public static final int time_title=0x7f060012;
-        public static final int voltage_title=0x7f06000f;
+        public static final int time_title=0x7f060010;
+        public static final int voltage_title=0x7f06000d;
     }
     public static final class style {
         /** 

@@ -18,7 +18,7 @@ public class BatteryService extends Service{
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Intent dialogIntent = new Intent(getBaseContext(), MainActivity.class);
+        Intent dialogIntent = new Intent(getBaseContext(), General.class);
         dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         dialogIntent.setAction(Intent.ACTION_BATTERY_CHANGED);
         getApplication().startActivity(dialogIntent);

@@ -33,10 +33,10 @@ public class Advance extends PreferenceActivity {
 		BatteryInformation();
 		mHandler.sendEmptyMessageDelayed(EVENT_TICK, 1000);
 	}
-	@Override
-	public void onBackPressed() {
-	    moveTaskToBack(true);
-	}
+//	@Override
+//	public void onBackPressed() {
+//	    moveTaskToBack(true);
+//	}
 
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);

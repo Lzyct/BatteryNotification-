@@ -23,23 +23,31 @@ public class General extends PreferenceActivity {
 	CheckBoxPreference cb1, cb2, cb3, cb4;
 
 	// boolean to fix always playing tone
-	boolean a, b, c, d;
+	boolean a, b, c, d,register;
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		getBatteryInformation();
+		IntentFilter batteryLevelFilter = new IntentFilter(
+				Intent.ACTION_BATTERY_CHANGED);
+		registerReceiver(mBatteryInfoReceiver, batteryLevelFilter);
+		register=true;
+	//		getBatteryInformation();
 	}
-
-	@Override
-	public void onBackPressed() {
-		moveTaskToBack(true);
+	
+	public void onDestroy(){
+		super.onDestroy();
+		if (register==true){
+		unregisterReceiver(mBatteryInfoReceiver);
+		}
 	}
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		addPreferencesFromResource(R.xml.general_screen);
+		if (register==true){
+			unregisterReceiver(mBatteryInfoReceiver);
+			}
 	}
 
 	// mendapatkan status checkbox
@@ -58,9 +66,9 @@ public class General extends PreferenceActivity {
 		discharge = sharedPrefs.getBoolean("prefdischarge", false);
 	}
 
-	// Set ringtone berdasarkan statusnya
-
-	private void getBatteryInformation() {
+//	// Set ringtone berdasarkan statusnya
+//
+//	private void getBatteryInformation() {
 
 		BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {
 
@@ -141,11 +149,19 @@ public class General extends PreferenceActivity {
 				}
 			}
 		};
-		IntentFilter batteryLevelFilter = new IntentFilter(
-				Intent.ACTION_BATTERY_CHANGED);
-		registerReceiver(mBatteryInfoReceiver, batteryLevelFilter);
-
-	}
+		
+//		if (register ==false){
+//				IntentFilter batteryLevelFilter = new IntentFilter(
+//						Intent.ACTION_BATTERY_CHANGED);
+//				registerReceiver(mBatteryInfoReceiver, batteryLevelFilter);
+//				register=true;
+//			}
+//		else if (register==true){
+//			unregisterReceiver(mBatteryInfoReceiver);
+//			register=false;
+//		}
+		
+//	}
 
 	// ringtone low
 	public void setRingtoneLow() {

@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
 public class Settings extends PreferenceActivity {
-	@Override
-	public void onBackPressed() {
-	    moveTaskToBack(true);
-	}
+//	@Override
+//	public void onBackPressed() {
+//	    moveTaskToBack(true);
+//	}
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
