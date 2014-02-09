@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Battery Notification+</string>
+    <!-- Tab Name -->
     <string name="action_settings">Settings</string>
     <string name="general_title">General</string>
     <string name="advance_title">Advance</string>
+    <!-- Tab Advance -->
     <string name="battery_info">Battery Information</string>
     <string name="advance_option">Advance Settings</string>
-    <string name="kosong"></string>
-    
-    
-    <!-- Battery Information -->
+    <string name="kosong" />
     <string name="status_title">Battery status</string>
     <string name="plug_title">Power Plug</string>
     <string name="level_title">Battery Level</string>
@@ -19,44 +17,58 @@
     <string name="temp_title">Battery Temperature</string>
     <string name="tekno_title">Battery Technology</string>
     <string name="time_title">Time Since Boot</string>
-    
-    
-    <!-- Battery Info screen. Value for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="battery_info_status_unknown">Unknown</string>
     <string name="battery_info_status_charging">Charging</string>
     <string name="battery_info_status_discharging">Discharging</string>
     <string name="battery_info_status_not_charging">Not charging</string>
     <string name="battery_info_status_full">Full</string>
-    
     <string name="battery_info_power_unplugged">Unplugged</string>
     <string name="battery_info_power_ac">AC</string>
     <string name="battery_info_power_usb">USB</string>
     <string name="battery_info_power_ac_usb">AC+USB</string>
     <string name="battery_info_power_unknown">Unknown</string>
-    
     <string name="battery_info_health_unknown">Unknown</string>
     <string name="battery_info_health_good">Good</string>
     <string name="battery_info_health_overheat">Overheat</string>
     <string name="battery_info_health_dead">Dead</string>
     <string name="battery_info_health_over_voltage">Over voltage</string>
     <string name="battery_info_health_unspecified_failure">Unknown error</string>
-    <string name="battery_info_temperature_units">\u00B0 C</string>
+    <string name="battery_info_temperature_units">° C</string>
+    <string name="fast_title">Fast Charge</string>
+    <string name="fast_summary">Enable/Disable Fast Charge</string>
+    <string name="kalibarasi_title">Battery Calibration</string>
+    <string name="kalibarasi_summary">Tap here to calibrate your battery</string>
+    
+    <!-- Tab General -->
+    <string name="low_title">Battery Low Notification</string>
+    <string name="low_summary">Enable/Disable Battery Low Notification</string>
+    <string name="full_title">Battery Full Notification</string>
+    <string name="full_summary">Enable/Disable Battery Full Notification</string>
+    <string name="charge_title">Charging Notification</string>
+    <string name="charge_summary">Enable/Disable Charging Notification</string>
+    <string name="discharge_title">Discharge Notification</string>
+    <string name="discharge_summary">Enable/Disable Discharging Notification</string>
+    <string name="sound_low_title">Battery Low Sound</string>
+    <string name="sound_low_summary">Set notification sound for battery low</string>
+    <string name="sound_full_title">Battery Full Sound</string>
+    <string name="sound_full_summary">Set notification sound for battery Full</string>
+    <string name="sound_charge_title">Battery Charge Sound</string>
+    <string name="sound_charge_summary">Set notification sound for battery Charge</string>
+    <string name="sound_discharge_title">Battery Discharge Sound</string>
+    <string name="sound_discharge_summary">Set notification sound for battery Discharge</string>
+    <string name="notification_title">Notification Settings</string>
     
     
-    <!-- Advance Settings -->
-	<string name="fast_title">Fast Charge</string>
-	<string name="fast_summary">Enable/Disable Fast Charge</string>
-	<string name="kalibarasi_title">Battery Calibration</string>
-	<string name="kalibarasi_summary">Tap here to calibrate your battery</string>
-	
-	
-	<!-- General Settings -->
-	<string name="low_title">Battery Low Notification</string>
-	<string name="low_summary">Enable/Disable Battery Low Notification</string>
-	<string name="full_title">Battery Full Notification</string>
-	<string name="full_summary">Enable/Disable Battery Full Notification</string>
-	<string name="charge_title">Charging Notification</string>
-	<string name="charge_summary">Enable/Disable Charging Notification</string>
-	<string name="discharge_title">Discharge Notification</string>
-	<string name="discharge_summary">Enable/Disable Discharging Notification</string>
+    <!-- Tab Settings -->
+    <string name="devinfo">About Application</string>
+    <string name="setboot_title">Set on boot</string>
+    <string name="setboot_summary">Run app when boot</string>
+    <string name="app_info_title">Battery Notification+</string>
+    <string name="app_info_summary">Version 1.0</string>
+    <string name="devid_title">Developer ID</string>
+    <string name="devid_summary">Tuxkids</string>
+    <string name="contact_title">Contact Developer</string>
+    <string name="contact_summary">ukie.tux@gmail.com</string>
+    <string name="thanks_title">Thanks to</string>
+    <string name="thanks_summary">Android UIN Alauddin Makassar and Donaturs of CyanTux ROM</string>
 </resources>
