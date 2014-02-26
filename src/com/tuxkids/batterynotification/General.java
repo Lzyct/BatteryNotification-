@@ -48,6 +48,7 @@ public class General extends PreferenceActivity {
 		if (register==true){
 			unregisterReceiver(mBatteryInfoReceiver);
 			}
+		moveTaskToBack(true);
 	}
 
 	// mendapatkan status checkbox
