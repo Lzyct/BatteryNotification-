@@ -21,16 +21,22 @@ import android.widget.Toast;
 public class General extends PreferenceActivity {
 	boolean low, full, charge, discharge;
 	CheckBoxPreference cb1, cb2, cb3, cb4;
-
+		
 	// boolean to fix always playing tone
 	boolean a, b, c, d,register;
-
+	int nilaix;
+	
 	@Override
 	public void onResume() {
 		super.onResume();
 		IntentFilter batteryLevelFilter = new IntentFilter(
 				Intent.ACTION_BATTERY_CHANGED);
 		registerReceiver(mBatteryInfoReceiver, batteryLevelFilter);
+		
+		IntentFilter filter = new IntentFilter();
+        filter.addAction("update.Nilai");
+        getBaseContext().registerReceiver(mIntentReceiver, filter);
+		
 		register=true;
 	//		getBatteryInformation();
 	}
@@ -39,14 +45,43 @@ public class General extends PreferenceActivity {
 		super.onDestroy();
 		if (register==true){
 		unregisterReceiver(mBatteryInfoReceiver);
+		getBaseContext().unregisterReceiver(mIntentReceiver);
 		}
 	}
+	
+
+    private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("update.NILAI")){
+            	//grep broadcast from Settings.java
+            	String nilai = intent.getStringExtra("Nilai");	
+            	updateNilai(nilai);
+            	int nilaix = Integer.valueOf(nilai); 
+            	int duration = Toast.LENGTH_SHORT;
+        		Toast toast = Toast.makeText(getBaseContext(), nilaix,
+        				duration);
+        		toast.show();
+            }
+          }
+    };
+    
+    public final void updateNilai(String Nilai) {    
+    	int nilaix = Integer.valueOf(Nilai); 
+    	int duration = Toast.LENGTH_SHORT;
+		Toast toast = Toast.makeText(getBaseContext(), nilaix,
+				duration);
+		toast.show();
+    	
+    }
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.general_screen);
 		if (register==true){
 			unregisterReceiver(mBatteryInfoReceiver);
+			getBaseContext().unregisterReceiver(mIntentReceiver);
 			}
 		moveTaskToBack(true);
 	}
@@ -66,7 +101,8 @@ public class General extends PreferenceActivity {
 		charge = sharedPrefs.getBoolean("prefcharge", false);
 		discharge = sharedPrefs.getBoolean("prefdischarge", false);
 	}
-
+	
+	
 //	// Set ringtone berdasarkan statusnya
 //
 //	private void getBatteryInformation() {
@@ -75,8 +111,16 @@ public class General extends PreferenceActivity {
 
 			public void onReceive(Context context, Intent intent) {
 				String action = intent.getAction();
+				
+//				if (action.equals("update.NILAI")){
+//	            	//grep broadcast from Settings.java
+//	            	String nilai = intent.getStringExtra("Nilai");
+//	            	nilaix = Integer.valueOf(nilai);
+//				}
 
 				if (intent.ACTION_BATTERY_CHANGED.equals(action)) {
+
+					
 					// get battery level
 					int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL,
 							0);
@@ -128,13 +172,17 @@ public class General extends PreferenceActivity {
 							c = false;
 						}
 					}
-					if (low == true && battery_level <= 12 && statusString == 2) {
+					
+		            
+		            
+		            if (low == true && battery_level <= nilaix && statusString == 2) {
 						if (d == false) {
 							setRingtoneLow();
 							tampilNotifikasiLow();
 							d = true;
+						
 						}
-					}
+		            }
 					if (full == true && statusString == 4) {
 						if (c == false) {
 							setRingtoneFull();
@@ -145,19 +193,6 @@ public class General extends PreferenceActivity {
 				}
 			}
 		};
-		
-//		if (register ==false){
-//				IntentFilter batteryLevelFilter = new IntentFilter(
-//						Intent.ACTION_BATTERY_CHANGED);
-//				registerReceiver(mBatteryInfoReceiver, batteryLevelFilter);
-//				register=true;
-//			}
-//		else if (register==true){
-//			unregisterReceiver(mBatteryInfoReceiver);
-//			register=false;
-//		}
-		
-//	}
 
 	// ringtone low
 	public void setRingtoneLow() {
@@ -234,29 +269,31 @@ public class General extends PreferenceActivity {
 		}
 	}
 
+	//Notification Full
 	public void tampilNotifikasiFull() {
 
 		NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		Notification notification = new Notification(R.drawable.ic_launcher,
 				"Battery Full", System.currentTimeMillis());
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
-		Intent intent = new Intent(this, MainActivity.class);
+		Intent intent = new Intent(this, Advance.class);
 		PendingIntent activity = PendingIntent.getActivity(this, 0, intent, 0);
 		notification.setLatestEventInfo(this, "Battery Full",
-				"Swipe to remove notification", activity);
+				"Touch to see Battery Information", activity);
 		notificationManager.notify(0, notification);
 	}
 	
+	//Notification Low
 	public void tampilNotifikasiLow() {
 
 		NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		Notification notification = new Notification(R.drawable.ic_launcher,
 				"Battery Low", System.currentTimeMillis());
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
-		Intent intent = new Intent(this, MainActivity.class);
+		Intent intent = new Intent(this, Advance.class);
 		PendingIntent activity = PendingIntent.getActivity(this, 0, intent, 0);
-		notification.setLatestEventInfo(this, "Battery Full",
-				"Swipe to remove notification", activity);
+		notification.setLatestEventInfo(this, "Battery Low",
+				"Touch to see Battery Information", activity);
 		notificationManager.notify(0, notification);
 	}
 

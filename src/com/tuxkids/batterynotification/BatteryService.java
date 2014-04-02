@@ -6,7 +6,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 public class BatteryService extends Service{
-    private static String TAG = "Battery Tools";
+    private static String TAG = "BatteryNotification+";
     
     General Gl = new General();
     @Override

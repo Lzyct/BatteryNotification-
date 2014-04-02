@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
   xmlns:android="http://schemas.android.com/apk/res/android">
+  	<PreferenceCategory android:title="@string/action_settings">
+  	    <ListPreference 
+  	        android:key="value_battery_low"
+  	        android:entries="@array/list_battery_low"
+  	        android:entryValues="@array/value_battery_low"
+  	        android:title="@string/set_value_title"
+  	        android:summary="@string/set_value_summary"
+  	        />
+  	    </PreferenceCategory>
     <PreferenceCategory android:title="@string/devinfo">
         <PreferenceScreen android:title="@string/app_info_title" android:summary="@string/app_info_summary" />
         <PreferenceScreen android:title="@string/devid_title" android:summary="@string/devid_summary" />
