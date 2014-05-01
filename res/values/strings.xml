@@ -60,7 +60,7 @@
     
     
     <!-- Tab Settings -->
-    <string name="set_value_title">Set Value</string>
+    <string name="set_value_title">Battery Low Level</string>
     <string name="set_value_summary">Set Value Battery Low in Percent</string>
     <string name="devinfo">About Application</string>
     <string name="setboot_title">Set on boot</string>
