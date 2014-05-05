@@ -15,36 +15,41 @@ import android.widget.Toast;
 
 public class Settings extends PreferenceActivity {
 	
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
+	public void onCreate(Bundle icicle) {
+		super.onCreate(icicle);
 		addPreferencesFromResource(R.xml.settings_screen);
+		sendValue();
 	}
 	public void onResume(){
 		super.onResume();
 		sendValue();
 	}
+	public void onPause(){
+		super.onPause();
+	}
 	
 	public void sendValue(){
 		ListPreference low_level = (ListPreference) findPreference ("value_battery_low");
-		
+		low_level.setSummary(low_level.getEntry());
 		low_level.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 			
 			@Override
 			public boolean onPreferenceChange(Preference preference,
 					Object newValue) {
-				SharedPreferences prefs = getSharedPreferences("low_level", MODE_WORLD_READABLE);
-				String nilai = ((ListPreference) preference).getValue();
-				preference.setSummary(((ListPreference) preference).getEntry());
+				
+				String nilai = (String) newValue;
+				SharedPreferences prefs = getSharedPreferences("low_level", MODE_PRIVATE);
 				Editor mEditor = prefs.edit();
 				mEditor.putString("value_battery_low", nilai);
 				mEditor.commit();
 				int duration = Toast.LENGTH_SHORT;
 				Toast toast = Toast.makeText(getBaseContext(), "nilai : "+nilai,
 						duration);
-				toast.show();	
+				toast.show();
+				preference.setSummary(nilai+"%");
 				return true;
 			}
         });		
+		
 		}
 }

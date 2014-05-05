@@ -8,6 +8,7 @@
   	        android:entryValues="@array/value_battery_low"
   	        android:title="@string/set_value_title"
   	        android:summary="@string/set_value_summary"
+  	        android:defaultValue="10"
   	        />
   	    </PreferenceCategory>
     <PreferenceCategory android:title="@string/devinfo">

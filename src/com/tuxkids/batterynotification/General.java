@@ -33,17 +33,11 @@ public class General extends PreferenceActivity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		getValue();
 		IntentFilter batteryLevelFilter = new IntentFilter(
 				Intent.ACTION_BATTERY_CHANGED);
 		registerReceiver(mBatteryInfoReceiver, batteryLevelFilter);
 		
-//		IntentFilter filter = new IntentFilter();
-//        filter.addAction("update.Nilai");
-//        getBaseContext().registerReceiver(mIntentReceiver, filter);
-		
 		register=true;
-	//		getBatteryInformation();
 	}
 	
 	public void onDestroy(){
@@ -55,32 +49,6 @@ public class General extends PreferenceActivity {
 	}
 	
 
-//    private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            String action = intent.getAction();
-//            if (action.equals("update.NILAI")){
-//            	//grep broadcast from Settings.java
-//            	String nilai = intent.getStringExtra("Nilai");	
-//            	updateNilai(nilai);
-//            	int nilaix = Integer.valueOf(nilai); 
-//            	int duration = Toast.LENGTH_SHORT;
-//        		Toast toast = Toast.makeText(getBaseContext(), nilaix,
-//        				duration);
-//        		toast.show();
-//            }
-//          }
-//    };
-    
-//    public final void updateNilai(String Nilai) {    
-//    	int nilaix = Integer.valueOf(Nilai); 
-//    	int duration = Toast.LENGTH_SHORT;
-//		Toast toast = Toast.makeText(getBaseContext(), nilaix,
-//				duration);
-//		toast.show();
-//    	
-//    }
-
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.general_screen);
@@ -89,32 +57,9 @@ public class General extends PreferenceActivity {
 			unregisterReceiver(mBatteryInfoReceiver);
 //			getBaseContext().unregisterReceiver(mIntentReceiver);
 			}
-		moveTaskToBack(true);
-		getValue();
-		
+		moveTaskToBack(true);		
 	}
 
-	public void getValue(){
-		PreferenceChangeListener mPreferenceListener = null;
-		SharedPreferences prefs = getSharedPreferences("low_level", Context.MODE_WORLD_READABLE);
-		prefs.registerOnSharedPreferenceChangeListener((OnSharedPreferenceChangeListener) mPreferenceListener);
-		
-		String low_battery_level= prefs.getString("value_battery_low", null);
-		if (low_battery_level == null){
-		String anu = "null value";
-		int duration = Toast.LENGTH_SHORT;
-		Toast toast = Toast.makeText(getBaseContext(), anu,
-				duration);
-		toast.show();
-		}
-		else {
-		int low_level = Integer.parseInt(low_battery_level);
-		int duration = Toast.LENGTH_SHORT;
-		Toast toast = Toast.makeText(getBaseContext(), "nilai : "+low_level,
-				duration);
-		toast.show();
-		}
-	}
 
 	
 	// mendapatkan status checkbox
@@ -142,6 +87,14 @@ public class General extends PreferenceActivity {
 
 			public void onReceive(Context context, Intent intent) {
 				String action = intent.getAction();
+				
+				//get value low_level from Settings
+				PreferenceChangeListener mPreferenceListener = null;
+				SharedPreferences prefs = getSharedPreferences("low_level", Context.MODE_PRIVATE);
+				prefs.registerOnSharedPreferenceChangeListener((OnSharedPreferenceChangeListener) mPreferenceListener);				
+				String low_battery_level= prefs.getString("value_battery_low", null);
+
+				
 				
 				if (intent.ACTION_BATTERY_CHANGED.equals(action)) {
 										
@@ -197,15 +150,27 @@ public class General extends PreferenceActivity {
 						}
 					}
 					
-		            
-		            if (low == true && battery_level <= 12 && statusString == 2) {
-						if (d == false) {
-							setRingtoneLow();
-							tampilNotifikasiLow();
-							d = true;
-						
-						}
-		            }
+					if (low_battery_level == null){
+					int low_level=10;
+			            if (low == true && battery_level <= low_level && statusString == 2) {
+							if (d == false) {
+								setRingtoneLow();
+								tampilNotifikasiLow();
+								d = true;
+							
+								}
+			            	}
+					} else {
+						int low_level = Integer.parseInt(low_battery_level);
+						if (low == true && battery_level <= low_level && statusString == 2) {
+							if (d == false) {
+								setRingtoneLow();
+								tampilNotifikasiLow();
+								d = true;
+							
+								}
+			            	}
+					}
 					if (full == true && statusString == 4) {
 						if (c == false) {
 							setRingtoneFull();
