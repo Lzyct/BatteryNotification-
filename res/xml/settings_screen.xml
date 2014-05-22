@@ -2,18 +2,26 @@
 <PreferenceScreen
   xmlns:android="http://schemas.android.com/apk/res/android">
   	<PreferenceCategory android:title="@string/action_settings">
+  	    <com.tuxkids.batterynotification.AdPreference 
+  	        android:layout="@layout/ad_layout"/>
   	    <ListPreference 
   	        android:key="value_battery_low"
-  	        android:entries="@array/list_battery_low"
-  	        android:entryValues="@array/value_battery_low"
+  	        android:entries="@array/entries_battery_low"
+  	        android:entryValues="@array/entryValues_battery_low"
   	        android:title="@string/set_value_title"
   	        android:summary="@string/set_value_summary"
   	        android:defaultValue="10"
   	        />
   	    </PreferenceCategory>
     <PreferenceCategory android:title="@string/devinfo">
-        <PreferenceScreen android:title="@string/app_info_title" android:summary="@string/app_info_summary" />
-        <PreferenceScreen android:title="@string/devid_title" android:summary="@string/devid_summary" />
-        <PreferenceScreen android:title="@string/thanks_title" android:summary="@string/thanks_summary" />
+        <PreferenceScreen 
+            android:title="@string/app_info_title" 
+            android:summary="@string/app_info_summary" />
+        <PreferenceScreen 
+            android:title="@string/devid_title" 
+            android:summary="@string/devid_summary" />
+        <PreferenceScreen 
+            android:title="@string/contact_title" 
+            android:summary="@string/contact_summary" />
     </PreferenceCategory>
 </PreferenceScreen>

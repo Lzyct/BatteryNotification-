@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="value_battery_low">
+    <string-array name="entryValues_battery_low">
         <item>10</item>
         <item>12</item>
         <item>14</item>
@@ -8,12 +8,12 @@
         <item>18</item>
         <item>20</item>
     </string-array>
-    <string-array name="list_battery_low">
-        <item>10%</item>
-        <item>12%</item>
-        <item>14%</item>
-        <item>16%</item>
-        <item>18%</item>
-        <item>20%</item>
+    <string-array name="entries_battery_low">
+        <item>10 Percent</item>
+        <item>12 Percent</item>
+        <item>14 Percent</item>
+        <item>16 Percent</item>
+        <item>18 Percent</item>
+        <item>20 Percent</item>
     </string-array>
 </resources>

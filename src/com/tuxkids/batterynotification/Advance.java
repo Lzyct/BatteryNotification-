@@ -19,6 +19,7 @@ import android.preference.PreferenceActivity;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 public class Advance extends PreferenceActivity {
@@ -26,6 +27,7 @@ public class Advance extends PreferenceActivity {
 	private final static String fastcharge = "/sys/kernel/fast_charge/force_fast_charge";
 	final String close = "exit";
 	private static final int EVENT_TICK = 1;
+	private static final String TAG = "SU check";
 
 	@Override
 	public void onResume() {
@@ -223,6 +225,7 @@ public class Advance extends PreferenceActivity {
 		CheckBoxPreference cb1 = (CheckBoxPreference) findPreference("preffast");
 		File myFile = new File(fastcharge);
 		if (myFile.exists()) {
+			cb1.setEnabled(true);
 			// set value fast charge
 			String status = getCurrentStatus();
 			String aktif = "1";
@@ -253,17 +256,39 @@ public class Advance extends PreferenceActivity {
 
 					@Override
 					public boolean onPreferenceClick(Preference preference) {
-						CalibrationAlert();
+						if (!new File("/system/bin/su").exists()
+								&& !new File("/system/xbin/su").exists()) {
+							Log.e(TAG, "su does not exist!!!");
+							CekSU();
+							return false;
+						} else{
+							CalibrationAlert();
+						}
 						return false;
 					}
 				});
 	}
 
+	public void CekSU(){
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setCancelable(true)
+				.setTitle("Error")
+				.setMessage("You Need Root Access to Calibrate your Battery")
+				.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+					}
+				});
+				
+		AlertDialog alert = builder.create();
+		alert.show();
+	}
+	
 	public void CalibrationAlert() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setCancelable(true)
 				.setTitle("Alert")
-				.setMessage("Are you sure to calibration your battery ?")
+				.setMessage("Are you sure to Calibrate your battery ?")
 				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						// do calibration

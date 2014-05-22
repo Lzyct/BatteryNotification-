@@ -15,8 +15,8 @@ public final class R {
         public static final int slide_right_out=0x7f040003;
     }
     public static final class array {
-        public static final int list_battery_low=0x7f060001;
-        public static final int value_battery_low=0x7f060000;
+        public static final int entries_battery_low=0x7f060001;
+        public static final int entryValues_battery_low=0x7f060000;
     }
     public static final class attr {
     }
@@ -43,20 +43,17 @@ public final class R {
         public static final int tab_bg_selector=0x7f020004;
     }
     public static final class id {
-        public static final int action_settings=0x7f0d0003;
-        public static final int horizontalScrollView=0x7f0d0000;
-        public static final int tabsLayout=0x7f0d0001;
-        public static final int tabsText=0x7f0d0002;
+        public static final int horizontalScrollView=0x7f0c0000;
+        public static final int tabsLayout=0x7f0c0001;
+        public static final int tabsText=0x7f0c0002;
     }
     public static final class integer {
         public static final int fling_animation_duration=0x7f090000;
     }
     public static final class layout {
-        public static final int mainscreen=0x7f030000;
-        public static final int tabs_bg=0x7f030001;
-    }
-    public static final class menu {
-        public static final int main=0x7f0c0000;
+        public static final int ad_layout=0x7f030000;
+        public static final int mainscreen=0x7f030001;
+        public static final int tabs_bg=0x7f030002;
     }
     public static final class string {
         /**  Tab Name 
@@ -131,8 +128,6 @@ public final class R {
         public static final int status_title=0x7f070009;
         public static final int tekno_title=0x7f07000f;
         public static final int temp_title=0x7f07000e;
-        public static final int thanks_summary=0x7f070043;
-        public static final int thanks_title=0x7f070042;
         public static final int time_title=0x7f070010;
         public static final int voltage_title=0x7f07000d;
     }
@@ -151,12 +146,6 @@ public final class R {
         AppBaseTheme from res/values/styles.xml on API 11+ devices.
     
  API 11 theme customizations can go here. 
-
-        Base application theme for API 14+. This theme completely replaces
-        AppBaseTheme from BOTH res/values/styles.xml and
-        res/values-v11/styles.xml on API 14+ devices.
-    
- API 14 theme customizations can go here. 
          */
         public static final int AppBaseTheme=0x7f0b0000;
         /**  Application theme. 

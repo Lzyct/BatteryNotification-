@@ -2,17 +2,50 @@
 <PreferenceScreen
   xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/battery_info">
-        <PreferenceScreen android:title="@string/status_title" android:key="status" android:summary="@string/kosong" />
-        <PreferenceScreen android:title="@string/plug_title" android:key="plug" android:summary="@string/kosong" />
-        <PreferenceScreen android:title="@string/level_title" android:key="level" android:summary="@string/kosong" />
-        <PreferenceScreen android:title="@string/health_title" android:key="health" android:summary="@string/kosong" />
-        <PreferenceScreen android:title="@string/voltage_title" android:key="voltage" android:summary="@string/kosong" />
-        <PreferenceScreen android:title="@string/temp_title" android:key="temp" android:summary="@string/kosong" />
-        <PreferenceScreen android:title="@string/tekno_title" android:key="tekno" android:summary="@string/kosong" />
-        <PreferenceScreen android:title="@string/time_title" android:key="time" android:summary="@string/kosong" />
+        <com.tuxkids.batterynotification.AdPreference 
+      		android:layout="@layout/ad_layout"/>
+        <PreferenceScreen 
+            android:title="@string/status_title" 
+            android:key="status" 
+            android:summary="@string/kosong" />
+        <PreferenceScreen 
+            android:title="@string/plug_title" 
+            android:key="plug" 
+            android:summary="@string/kosong" />
+        <PreferenceScreen 
+            android:title="@string/level_title" 
+            android:key="level" 
+            android:summary="@string/kosong" />
+        <PreferenceScreen 
+            android:title="@string/health_title" 
+            android:key="health" 
+            android:summary="@string/kosong" />
+        <PreferenceScreen 
+            android:title="@string/voltage_title" 
+            android:key="voltage" 
+            android:summary="@string/kosong" />
+        <PreferenceScreen 
+            android:title="@string/temp_title" 
+            android:key="temp" 
+            android:summary="@string/kosong" />
+        <PreferenceScreen 
+            android:title="@string/tekno_title" 
+            android:key="tekno" 
+            android:summary="@string/kosong" />
+        <PreferenceScreen 
+            android:title="@string/time_title" 
+            android:key="time" 
+            android:summary="@string/kosong" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/advance_option">
-        <PreferenceScreen android:title="@string/kalibarasi_title" android:key="kalibrasi" android:summary="@string/kalibarasi_summary" />
-        <CheckBoxPreference android:title="@string/fast_title" android:key="preffast" android:summary="@string/fast_summary" android:defaultValue="false" />
+        <PreferenceScreen 
+            android:title="@string/kalibarasi_title" 
+            android:key="kalibrasi" 
+            android:summary="@string/kalibarasi_summary" />
+        <CheckBoxPreference 
+            android:title="@string/fast_title" 
+            android:key="preffast" 
+            android:summary="@string/fast_summary" 
+            android:defaultValue="false" />
     </PreferenceCategory>
 </PreferenceScreen>
