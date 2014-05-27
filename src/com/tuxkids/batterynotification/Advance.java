@@ -43,7 +43,7 @@ public class Advance extends PreferenceActivity {
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		addPreferencesFromResource(R.xml.advance_screen);
-
+		setContentView(R.layout.ad_layout);
 		// battery calibration
 		calibration();
 
@@ -62,6 +62,7 @@ public class Advance extends PreferenceActivity {
 		return Integer.toString(tens) + "." + (x - 10 * tens);
 	}
 
+	
 	private void BatteryInformation() {
 
 		BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {

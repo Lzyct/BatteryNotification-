@@ -2,8 +2,8 @@
 <PreferenceScreen
   xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/app_name">
-        <com.tuxkids.batterynotification.AdPreference 
-            android:layout="@layout/ad_layout"/>
+        <!--com.tuxkids.batterynotification.AdPreference 
+            android:layout="@layout/ad_layout"/-->
     	<CheckBoxPreference 
             android:title="@string/low_title" 
             android:key="preflow" 
@@ -55,4 +55,7 @@
             android:showDefault="true" 
             android:showSilent="true" />
     </PreferenceCategory>    
+        <PreferenceScreen 
+            android:title="@string/kosong"
+            android:summary="@string/kosong" />
 </PreferenceScreen>

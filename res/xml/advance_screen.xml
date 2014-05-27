@@ -2,8 +2,8 @@
 <PreferenceScreen
   xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/battery_info">
-        <com.tuxkids.batterynotification.AdPreference 
-      		android:layout="@layout/ad_layout"/>
+        <!--com.tuxkids.batterynotification.AdPreference 
+      		android:layout="@layout/ad_layout"/-->
         <PreferenceScreen 
             android:title="@string/status_title" 
             android:key="status" 
@@ -48,4 +48,7 @@
             android:summary="@string/fast_summary" 
             android:defaultValue="false" />
     </PreferenceCategory>
+    <PreferenceScreen 
+            android:title="@string/kosong"
+            android:summary="@string/kosong" />
 </PreferenceScreen>

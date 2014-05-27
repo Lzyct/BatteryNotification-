@@ -55,7 +55,7 @@ public class General extends PreferenceActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.general_screen);
-		//setContentView(R.layout.ad_layout);
+		setContentView(R.layout.ad_layout);
 		
 		//set sambutan just show once when first application created
 		SharedPreferences prefs = getSharedPreferences("sambutan", MODE_PRIVATE);

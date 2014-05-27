@@ -2,8 +2,8 @@
 <PreferenceScreen
   xmlns:android="http://schemas.android.com/apk/res/android">
   	<PreferenceCategory android:title="@string/action_settings">
-  	    <com.tuxkids.batterynotification.AdPreference 
-  	        android:layout="@layout/ad_layout"/>
+  	    <!--com.tuxkids.batterynotification.AdPreference 
+  	        android:layout="@layout/ad_layout"/-->
   	    <ListPreference 
   	        android:key="value_battery_low"
   	        android:entries="@array/entries_battery_low"

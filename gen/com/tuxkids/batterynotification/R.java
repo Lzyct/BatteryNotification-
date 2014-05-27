@@ -43,9 +43,10 @@ public final class R {
         public static final int tab_bg_selector=0x7f020004;
     }
     public static final class id {
-        public static final int horizontalScrollView=0x7f0c0000;
-        public static final int tabsLayout=0x7f0c0001;
-        public static final int tabsText=0x7f0c0002;
+        public static final int adView=0x7f0c0000;
+        public static final int horizontalScrollView=0x7f0c0001;
+        public static final int tabsLayout=0x7f0c0002;
+        public static final int tabsText=0x7f0c0003;
     }
     public static final class integer {
         public static final int fling_animation_duration=0x7f090000;

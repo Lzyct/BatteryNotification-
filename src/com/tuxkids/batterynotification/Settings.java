@@ -1,24 +1,20 @@
 package com.tuxkids.batterynotification;
 
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceManager;
-import android.widget.Toast;
 
 public class Settings extends PreferenceActivity {
 	
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		addPreferencesFromResource(R.xml.settings_screen);
-		//setContentView(R.layout.ad_layout);
+		setContentView(R.layout.ad_layout);
 		sendValue();
 	}
 	public void onResume(){
