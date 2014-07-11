@@ -55,7 +55,7 @@
             android:showDefault="true" 
             android:showSilent="true" />
     </PreferenceCategory>    
-        <PreferenceScreen 
+        <!--PreferenceScreen 
             android:title="@string/kosong"
-            android:summary="@string/kosong" />
+            android:summary="@string/kosong" /-->
 </PreferenceScreen>

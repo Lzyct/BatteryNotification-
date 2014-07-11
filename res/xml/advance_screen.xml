@@ -48,7 +48,7 @@
             android:summary="@string/fast_summary" 
             android:defaultValue="false" />
     </PreferenceCategory>
-    <PreferenceScreen 
+    <!-- PreferenceScreen 
             android:title="@string/kosong"
-            android:summary="@string/kosong" />
+            android:summary="@string/kosong" /-->
 </PreferenceScreen>

@@ -43,7 +43,8 @@ public class Advance extends PreferenceActivity {
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		addPreferencesFromResource(R.xml.advance_screen);
-		setContentView(R.layout.ad_layout);
+		//not visible for cyantux users
+		//setContentView(R.layout.ad_layout);
 		// battery calibration
 		calibration();
 

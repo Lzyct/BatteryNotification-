@@ -14,7 +14,8 @@ public class Settings extends PreferenceActivity {
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		addPreferencesFromResource(R.xml.settings_screen);
-		setContentView(R.layout.ad_layout);
+		//not visible for cyantux users
+		//setContentView(R.layout.ad_layout);
 		sendValue();
 	}
 	public void onResume(){
